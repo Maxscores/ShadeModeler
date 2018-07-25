@@ -1,12 +1,10 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'database_cleaner'
-require 'webmock/rspec'
 require 'coveralls'
 Coveralls.wear!('rails')
 
 
-WebMock.disable_net_connect!(allow_localhost: true)
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
