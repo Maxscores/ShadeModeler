@@ -1,4 +1,7 @@
+require './app/services/util'
+
 class Panel
+  using Util
   attr_accessor :x_origin, :y_origin, :width, :length, :tilt, :azimuth
 
   def initialize(panel_config)
@@ -11,11 +14,11 @@ class Panel
   end
 
   def rad_azimuth
-    azimuth * Math::PI / 180
+    Util.to_rad(azimuth)
   end
 
   def rad_tilt
-    tilt * Math::PI / 180
+    Util.to_rad(tilt)
   end
 
   def effective_length
