@@ -2,7 +2,15 @@ require './app/services/panel'
 
 describe Panel do
   it "can return the coordinates of its corners with horizontal azimuth" do
-    panel = Panel.new(0,0,2,4,0,180)
+    panel_config = {
+      x_origin: 0,
+      y_origin: 0,
+      width: 2,
+      length: 4,
+      tilt: 0,
+      azimuth: 180
+    }
+    panel = Panel.new(panel_config)
 
     expect(panel.corner_1).to eq([-1, -2])
     expect(panel.corner_2).to eq([-1, 2])
@@ -11,7 +19,15 @@ describe Panel do
   end
 
   it "can return the coordinates of its square corners rotated" do
-    panel = Panel.new(0,0,2,2,0,135)
+    panel_config = {
+      x_origin: 0,
+      y_origin: 0,
+      width: 2,
+      length: 2,
+      tilt: 0,
+      azimuth: 135
+    }
+    panel = Panel.new(panel_config)
 
     expected_length = (Math.sqrt(8) / 2).round(2)
 
@@ -22,7 +38,16 @@ describe Panel do
   end
 
   it "can return the coordinates of rectangle corners rotated" do
-    panel = Panel.new(0,0,2,4,0,135)
+    panel_config = {
+      x_origin: 0,
+      y_origin: 0,
+      width: 2,
+      length: 4,
+      tilt: 0,
+      azimuth: 135
+    }
+
+    panel = Panel.new(panel_config)
 
     expected_length = Math.sqrt(8) / 2
 
@@ -38,7 +63,15 @@ describe Panel do
   end
 
   it "can return the coordinates of its corners with panel tilt" do
-    panel = Panel.new(0,0,2,4,30,180)
+    panel_config = {
+      x_origin: 0,
+      y_origin: 0,
+      width: 2,
+      length: 4,
+      tilt: 30,
+      azimuth: 180
+    }
+    panel = Panel.new(panel_config)
 
     expect(panel.corner_1).to eq([-1, -1.73])
     expect(panel.corner_2).to eq([-1, 1.73])
