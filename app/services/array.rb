@@ -26,8 +26,8 @@ class Array
       array_row = []
       column_count.times do |col|
         panel_config = {
-          x_origin: panel_width * col,
-          y_origin: panel_length * row,
+          x_origin: (panel_width + column_space ) * col,
+          y_origin: (panel_length + row_space) * row,
           width: panel_width,
           length: panel_length,
           tilt: panel_tilt,
