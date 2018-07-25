@@ -36,4 +36,13 @@ describe Panel do
     expect(panel.corner_3).to eq(expect_c3)
     expect(panel.corner_4).to eq(expect_c4)
   end
+
+  it "can return the coordinates of its corners with panel tilt" do
+    panel = Panel.new(0,0,2,4,30,180)
+
+    expect(panel.corner_1).to eq([-1, -1.73])
+    expect(panel.corner_2).to eq([-1, 1.73])
+    expect(panel.corner_3).to eq([1, 1.73])
+    expect(panel.corner_4).to eq([1, -1.73])
+  end
 end

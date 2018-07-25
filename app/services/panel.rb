@@ -18,9 +18,13 @@ class Panel
     tilt * Math::PI / 180
   end
 
+  def effective_height
+    height * Math.cos(rad_tilt)
+  end
+
   def corner_1
     original_x = -1 * width / 2
-    original_y = -1 * height / 2
+    original_y = -1 * effective_height / 2
 
     x_coord = x_origin - x_offset(original_x, original_y)
     y_coord = y_origin - y_offset(original_x, original_y)
@@ -29,7 +33,7 @@ class Panel
 
   def corner_2
     original_x = -1 * width / 2
-    original_y = height / 2
+    original_y = effective_height / 2
 
     x_coord = x_origin - x_offset(original_x, original_y)
     y_coord = y_origin - y_offset(original_x, original_y)
@@ -38,7 +42,7 @@ class Panel
 
   def corner_3
     original_x = width / 2
-    original_y = height / 2
+    original_y = effective_height / 2
 
     x_coord = x_origin - x_offset(original_x, original_y)
     y_coord = y_origin - y_offset(original_x, original_y)
@@ -47,7 +51,7 @@ class Panel
 
   def corner_4
     original_x = width / 2
-    original_y = -1 * height / 2
+    original_y = -1 * effective_height / 2
 
     x_coord = x_origin - x_offset(original_x, original_y)
     y_coord = y_origin - y_offset(original_x, original_y)
