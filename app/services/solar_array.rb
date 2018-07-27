@@ -1,6 +1,6 @@
 require './app/services/util'
 
-class Array
+class SolarArray
   using Util
   attr_accessor :panel_length,
                 :panel_width,
@@ -31,12 +31,29 @@ class Array
   end
 
   def generate_layout
+    starting_grid.each do |row|
+      row.each do |panel|
+        original_x = panel.x_origin
+        original_y = panel.y_origin
+        rotate_config = {
+          original_x: original_x,
+          original_y: original_y,
+          rotation: rad_array_azimuth
+        }
+
+        panel.x_origin = Util.rotate_x_offset(rotate_config)
+        panel.y_origin = Util.rotate_y_offset(rotate_config)
+      end
+    end
+  end
+
+  def starting_grid
     row_count.times do |row|
       array_row = []
       column_count.times do |col|
         panel_config = {
-          x_origin: (x_offset * (col + 1)).round(2),
-          y_origin: (y_offset * (row + 1)).round(2),
+          x_origin: (panel_width + column_space ) * col,
+          y_origin: (panel_length + row_space) * row,
           width: panel_width,
           length: panel_length,
           tilt: panel_tilt,
@@ -46,14 +63,11 @@ class Array
       end
       panels << array_row
     end
+    panels
   end
 
-  def x_offset
-    (panel_width + column_space) * Math.sin(rad_array_azimuth - Math::PI / 2)
-  end
+  def rotate_layout(grid)
 
-  def y_offset
-    (panel_length + row_space) * Math.cos(rad_array_azimuth - Math::PI)
   end
 
   def set_y_adjust(deg, row, col)
